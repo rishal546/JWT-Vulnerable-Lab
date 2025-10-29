@@ -24,7 +24,7 @@ This is a JWT Vulnerable lab to learn about JWT Vulnerabilities connected to rea
 
 > - Unzip the file
 > - Use python command to run app.py 
-> - Open the link mentioned
+> - Open the link mentioned after running to open the lab
 
 
 ### Run command
