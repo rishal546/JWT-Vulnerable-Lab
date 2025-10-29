@@ -20,13 +20,10 @@ Refresh /l1/orders.
 
 
 
-
 LEVEL 2(none)
-
 
 👉 Route: /l2/account
 Change the payload section to admin one and use algorithm type none
-
 
 {
   "sub": 9001,
@@ -45,29 +42,18 @@ Change the payload section to admin one and use algorithm type none
 
 
 
-
-
-
-
-
-
-
 LEVEL 3
 
-
 👉 Route: /l3/admin
-
 
 If you open astraliva/config.py
 FAKE_RSA_PUBLIC_KEY_XYZ789
 
-
 Go to jwt.io
 Header:
 { "alg": "HS256", "typ": "JWT" }
-
-
 Payload:
 { "sub": 9001, "username": "admin", "email": "admin@astraliva.test", "role":"admin" }
 Refresh /l3/admin.
+
 👉 Now you should see the Admin Dashboard instead of “Not an admin” or “invalid signature”.
