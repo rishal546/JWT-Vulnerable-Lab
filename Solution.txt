@@ -1,0 +1,73 @@
+﻿Level 1 — IDOR via JWT tampering
+👉 Route: /l1/orders
+Log in as alice at /auth/login/l1.
+
+Copy the JWT from your cookie (you can use the built-in /debug/decode endpoint).
+
+Decode the JWT (use jwt.io
+* Payload looks like { "user": "alice" }.
+
+Change "user": "alice" → "user": "bob" (or any other valid user in data.py).
+
+Re-encode with any key (or don’t even care, signature is ignored).
+
+Replace your cookie auth with this new token.
+
+Refresh /l1/orders.
+👉 You now see bob’s orders → classic IDOR.
+
+
+
+
+
+
+LEVEL 2(none)
+
+
+👉 Route: /l2/account
+Change the payload section to admin one and use algorithm type none
+
+
+{
+  "sub": 9001,
+  "username": "admin",
+  "email": "admin@astraliva.test",
+  "role": "admin"
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+LEVEL 3
+
+
+👉 Route: /l3/admin
+
+
+If you open astraliva/config.py
+FAKE_RSA_PUBLIC_KEY_XYZ789
+
+
+Go to jwt.io
+Header:
+{ "alg": "HS256", "typ": "JWT" }
+
+
+Payload:
+{ "sub": 9001, "username": "admin", "email": "admin@astraliva.test", "role":"admin" }
+Refresh /l3/admin.
+👉 Now you should see the Admin Dashboard instead of “Not an admin” or “invalid signature”.
